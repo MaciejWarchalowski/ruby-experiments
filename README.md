@@ -74,3 +74,33 @@ We get a collection of tokens.  Each token consists of [line, column], a token i
  [[5, 7], :on_nl, "\n"]]
 ```
 One thing to note in this example, is that the tokenizer can correctly distinguish `<` from `<<`. 
+
+## Example 3
+
+All the tokenizer does, is parse tokens.  It can not tell whether the syntax is correct.
+
+{% gist 8e048a43f4e5e42fc5778b8f64062513 lexing_example_3.rb %}
+
+In this example, there is an obvious syntax error.  Tokekenizer will hover still tokenize the file correctly. 
+
+```
+╰─$ ruby lexing_example_3.rb
+5.times do |x
+  puts x
+end
+[[[1, 0], :on_int, "5"],
+ [[1, 1], :on_period, "."],
+ [[1, 2], :on_ident, "times"],
+ [[1, 7], :on_sp, " "],
+ [[1, 8], :on_kw, "do"],
+ [[1, 10], :on_sp, " "],
+ [[1, 11], :on_op, "|"],
+ [[1, 12], :on_ident, "x"],
+ [[1, 13], :on_nl, "\n"],
+ [[2, 0], :on_sp, "  "],
+ [[2, 2], :on_ident, "puts"],
+ [[2, 6], :on_sp, " "],
+ [[2, 7], :on_ident, "x"],
+ [[2, 8], :on_nl, "\n"],
+ [[3, 0], :on_kw, "end"]]
+ ```
